@@ -1,0 +1,19 @@
+
+images.png
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+road
+  rotate: false
+  xy: 1, 1
+  size: 120, 120
+  orig: 120, 120
+  offset: 0, 0
+  index: -1
+car
+  rotate: false
+  xy: 123, 57
+  size: 120, 64
+  orig: 120, 64
+  offset: 0, 0
+  index: -1
