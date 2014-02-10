@@ -35,27 +35,35 @@ public class PlayerCar extends Actor {
 	private void updateBounds() {
 		bounds.set(getX(), getY(), getWidth(), getHeight());
 	}
+	
+	/**
+	 * for smooth road to change added some action
+	 */
+	private int ang = 15;
 
 	public void tryMoveUp() {
-		if ((getActions().size == 0) && (lane != 2)) moveToLane(lane+1);
+		if ((getActions().size == 0) && (lane != 2)) moveToLane(lane+1, ang);
 	}
 
 	public void tryMoveDown() {
-		if ((getActions().size == 0) && (lane != 0)) moveToLane(lane-1);
+		if ((getActions().size == 0) && (lane != 0)) moveToLane(lane-1,- ang);
 	}
 	
-	private void moveToLane(int lane) {
+	private void moveToLane(int lane,int angle) {
 		this.lane = lane;
 		
 		switch (lane) {
 			case 0:
-				addAction(moveTo(getX(), trafficGame.lane0 - getHeight()/2, 0.5f));
+				//addAction(moveTo(getX(), trafficGame.lane0 - getHeight()/2, 0.5f));
+				addAction(sequence(rotateBy(angle, 0.01f),parallel(moveTo(getX(), trafficGame.lane0 - getHeight()/2, 0.5f),rotateBy(-angle, 0.5f))));
 				break;
 			case 1:
-				addAction(moveTo(getX(), trafficGame.lane1 - getHeight()/2, 0.5f));
+				//addAction(moveTo(getX(), trafficGame.lane1 - getHeight()/2, 0.5f));
+				addAction(sequence(rotateBy(angle, 0.01f),parallel(moveTo(getX(), trafficGame.lane1 - getHeight()/2, 0.5f),rotateBy(-angle, 0.5f))));
 				break;
 			case 2:
-				addAction(moveTo(getX(), trafficGame.lane2 - getHeight()/2, 0.5f));
+				//addAction(moveTo(getX(), trafficGame.lane2 - getHeight()/2, 0.5f));
+				addAction(sequence(rotateBy(angle, 0.01f),parallel(moveTo(getX(), trafficGame.lane2 - getHeight()/2, 0.5f),rotateBy(-angle, 0.5f))));
 				break;
 		}
 	}
